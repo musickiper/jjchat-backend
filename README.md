@@ -5,7 +5,9 @@ This is a back-end application for a real-time chatting application
 ##### Tech Stack
 
 - Express
-- Apollo GraphQL
+- Apollo GraphQL (YOGA)
+- Passport
+- JWT
 - Prisma ORM
 - My SQL
 - Heroku, or Netlify
