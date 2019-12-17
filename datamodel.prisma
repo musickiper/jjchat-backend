@@ -1,5 +1,8 @@
 type User {
   id: ID! @id
-  password: String!
   username: String! @unique
+  password: String!
+  bio: String @default(value:"")
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
 }
