@@ -27,7 +27,7 @@ type Message {
   id: ID!
   text: String!
   from: User!
-  to: User!
+  to(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   room: Room!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -43,7 +43,7 @@ input MessageCreateInput {
   id: ID
   text: String!
   from: UserCreateOneInput!
-  to: UserCreateOneInput!
+  to: UserCreateManyInput
   room: RoomCreateOneWithoutMessagesInput!
 }
 
@@ -56,7 +56,7 @@ input MessageCreateWithoutRoomInput {
   id: ID
   text: String!
   from: UserCreateOneInput!
-  to: UserCreateOneInput!
+  to: UserCreateManyInput
 }
 
 type MessageEdge {
@@ -153,7 +153,7 @@ input MessageSubscriptionWhereInput {
 input MessageUpdateInput {
   text: String
   from: UserUpdateOneRequiredInput
-  to: UserUpdateOneRequiredInput
+  to: UserUpdateManyInput
   room: RoomUpdateOneRequiredWithoutMessagesInput
 }
 
@@ -185,7 +185,7 @@ input MessageUpdateManyWithWhereNestedInput {
 input MessageUpdateWithoutRoomDataInput {
   text: String
   from: UserUpdateOneRequiredInput
-  to: UserUpdateOneRequiredInput
+  to: UserUpdateManyInput
 }
 
 input MessageUpdateWithWhereUniqueWithoutRoomInput {
@@ -229,7 +229,9 @@ input MessageWhereInput {
   text_ends_with: String
   text_not_ends_with: String
   from: UserWhereInput
-  to: UserWhereInput
+  to_every: UserWhereInput
+  to_some: UserWhereInput
+  to_none: UserWhereInput
   room: RoomWhereInput
   createdAt: DateTime
   createdAt_not: DateTime
@@ -547,6 +549,11 @@ input UserCreateInput {
   rooms: RoomCreateManyWithoutParticipantsInput
 }
 
+input UserCreateManyInput {
+  create: [UserCreateInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
 input UserCreateManyWithoutRoomsInput {
   create: [UserCreateWithoutRoomsInput!]
   connect: [UserWhereUniqueInput!]
@@ -751,6 +758,18 @@ input UserUpdateManyDataInput {
   wallpaper: String
 }
 
+input UserUpdateManyInput {
+  create: [UserCreateInput!]
+  update: [UserUpdateWithWhereUniqueNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueNestedInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
+}
+
 input UserUpdateManyMutationInput {
   username: String
   password: String
@@ -791,12 +810,23 @@ input UserUpdateWithoutRoomsDataInput {
   wallpaper: String
 }
 
+input UserUpdateWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateDataInput!
+}
+
 input UserUpdateWithWhereUniqueWithoutRoomsInput {
   where: UserWhereUniqueInput!
   data: UserUpdateWithoutRoomsDataInput!
 }
 
 input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserUpsertWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput!
   update: UserUpdateDataInput!
   create: UserCreateInput!
 }

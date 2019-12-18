@@ -22,7 +22,7 @@ type Message {
   id: ID! @id
   text: String!
   from: User! @relation(name: "FromUserMessageRel")
-  to: User! @relation(name: "ToUserMessageRel")
+  to: [User!]! @relation(name: "ToUserMessageRel")
   room: Room! @relation(link: INLINE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
