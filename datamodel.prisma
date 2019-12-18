@@ -2,7 +2,28 @@ type User {
   id: ID! @id
   username: String! @unique
   password: String!
-  bio: String @default(value:"")
+  bio: String
+  avatar: String
+  wallpaper: String
+  rooms: [Room!]! @relation(link: TABLE, onDelete: CASCADE)
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Room {
+  id: ID! @id
+  participants: [User!]!
+  messages: [Message!]!
+  createdAt: DateTime! @createdAt
+  updatedAt: DateTime! @updatedAt
+}
+
+type Message {
+  id: ID! @id
+  text: String!
+  from: User! @relation(name: "FromUserMessageRel")
+  to: User! @relation(name: "ToUserMessageRel")
+  room: Room! @relation(link: INLINE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt
 }
