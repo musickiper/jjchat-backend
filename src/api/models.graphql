@@ -22,8 +22,7 @@ type Room {
 type Message {
   id: ID!
   text: String!
-  from: User!
-  to: [User!]!
+  user: User!
   room: Room!
   createdAt: String!
   updatedAt: String!
