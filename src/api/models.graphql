@@ -2,4 +2,29 @@ type User {
   id: ID!
   username: String!
   password: String!
+  nickname: String
+  bio: String
+  avatar: String
+  wallpaper: String
+  rooms: [Room!]!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Room {
+  id: ID!
+  participants: [User!]!
+  messages: [Message!]!
+  createdAt: String!
+  updatedAt: String!
+}
+
+type Message {
+  id: ID!
+  text: String!
+  from: User!
+  to: [User!]!
+  room: Room!
+  createdAt: String!
+  updatedAt: String!
 }

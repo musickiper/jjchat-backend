@@ -190,6 +190,8 @@ export type UserOrderByInput =
   | "username_DESC"
   | "password_ASC"
   | "password_DESC"
+  | "nickname_ASC"
+  | "nickname_DESC"
   | "bio_ASC"
   | "bio_DESC"
   | "avatar_ASC"
@@ -302,6 +304,20 @@ export interface UserWhereInput {
   password_not_starts_with?: Maybe<String>;
   password_ends_with?: Maybe<String>;
   password_not_ends_with?: Maybe<String>;
+  nickname?: Maybe<String>;
+  nickname_not?: Maybe<String>;
+  nickname_in?: Maybe<String[] | String>;
+  nickname_not_in?: Maybe<String[] | String>;
+  nickname_lt?: Maybe<String>;
+  nickname_lte?: Maybe<String>;
+  nickname_gt?: Maybe<String>;
+  nickname_gte?: Maybe<String>;
+  nickname_contains?: Maybe<String>;
+  nickname_not_contains?: Maybe<String>;
+  nickname_starts_with?: Maybe<String>;
+  nickname_not_starts_with?: Maybe<String>;
+  nickname_ends_with?: Maybe<String>;
+  nickname_not_ends_with?: Maybe<String>;
   bio?: Maybe<String>;
   bio_not?: Maybe<String>;
   bio_in?: Maybe<String[] | String>;
@@ -449,6 +465,7 @@ export interface UserCreateInput {
   id?: Maybe<ID_Input>;
   username: String;
   password: String;
+  nickname?: Maybe<String>;
   bio?: Maybe<String>;
   avatar?: Maybe<String>;
   wallpaper?: Maybe<String>;
@@ -505,6 +522,7 @@ export interface UserCreateWithoutRoomsInput {
   id?: Maybe<ID_Input>;
   username: String;
   password: String;
+  nickname?: Maybe<String>;
   bio?: Maybe<String>;
   avatar?: Maybe<String>;
   wallpaper?: Maybe<String>;
@@ -527,6 +545,7 @@ export interface UserUpdateOneRequiredInput {
 export interface UserUpdateDataInput {
   username?: Maybe<String>;
   password?: Maybe<String>;
+  nickname?: Maybe<String>;
   bio?: Maybe<String>;
   avatar?: Maybe<String>;
   wallpaper?: Maybe<String>;
@@ -669,6 +688,20 @@ export interface UserScalarWhereInput {
   password_not_starts_with?: Maybe<String>;
   password_ends_with?: Maybe<String>;
   password_not_ends_with?: Maybe<String>;
+  nickname?: Maybe<String>;
+  nickname_not?: Maybe<String>;
+  nickname_in?: Maybe<String[] | String>;
+  nickname_not_in?: Maybe<String[] | String>;
+  nickname_lt?: Maybe<String>;
+  nickname_lte?: Maybe<String>;
+  nickname_gt?: Maybe<String>;
+  nickname_gte?: Maybe<String>;
+  nickname_contains?: Maybe<String>;
+  nickname_not_contains?: Maybe<String>;
+  nickname_starts_with?: Maybe<String>;
+  nickname_not_starts_with?: Maybe<String>;
+  nickname_ends_with?: Maybe<String>;
+  nickname_not_ends_with?: Maybe<String>;
   bio?: Maybe<String>;
   bio_not?: Maybe<String>;
   bio_in?: Maybe<String[] | String>;
@@ -740,6 +773,7 @@ export interface UserUpdateManyWithWhereNestedInput {
 export interface UserUpdateManyDataInput {
   username?: Maybe<String>;
   password?: Maybe<String>;
+  nickname?: Maybe<String>;
   bio?: Maybe<String>;
   avatar?: Maybe<String>;
   wallpaper?: Maybe<String>;
@@ -896,6 +930,7 @@ export interface UserUpdateWithWhereUniqueWithoutRoomsInput {
 export interface UserUpdateWithoutRoomsDataInput {
   username?: Maybe<String>;
   password?: Maybe<String>;
+  nickname?: Maybe<String>;
   bio?: Maybe<String>;
   avatar?: Maybe<String>;
   wallpaper?: Maybe<String>;
@@ -930,6 +965,7 @@ export interface RoomUpdateInput {
 export interface UserUpdateInput {
   username?: Maybe<String>;
   password?: Maybe<String>;
+  nickname?: Maybe<String>;
   bio?: Maybe<String>;
   avatar?: Maybe<String>;
   wallpaper?: Maybe<String>;
@@ -939,6 +975,7 @@ export interface UserUpdateInput {
 export interface UserUpdateManyMutationInput {
   username?: Maybe<String>;
   password?: Maybe<String>;
+  nickname?: Maybe<String>;
   bio?: Maybe<String>;
   avatar?: Maybe<String>;
   wallpaper?: Maybe<String>;
@@ -1050,6 +1087,7 @@ export interface User {
   id: ID_Output;
   username: String;
   password: String;
+  nickname?: String;
   bio?: String;
   avatar?: String;
   wallpaper?: String;
@@ -1061,6 +1099,7 @@ export interface UserPromise extends Promise<User>, Fragmentable {
   id: () => Promise<ID_Output>;
   username: () => Promise<String>;
   password: () => Promise<String>;
+  nickname: () => Promise<String>;
   bio: () => Promise<String>;
   avatar: () => Promise<String>;
   wallpaper: () => Promise<String>;
@@ -1083,6 +1122,7 @@ export interface UserSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   username: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  nickname: () => Promise<AsyncIterator<String>>;
   bio: () => Promise<AsyncIterator<String>>;
   avatar: () => Promise<AsyncIterator<String>>;
   wallpaper: () => Promise<AsyncIterator<String>>;
@@ -1105,6 +1145,7 @@ export interface UserNullablePromise
   id: () => Promise<ID_Output>;
   username: () => Promise<String>;
   password: () => Promise<String>;
+  nickname: () => Promise<String>;
   bio: () => Promise<String>;
   avatar: () => Promise<String>;
   wallpaper: () => Promise<String>;
@@ -1530,6 +1571,7 @@ export interface UserPreviousValues {
   id: ID_Output;
   username: String;
   password: String;
+  nickname?: String;
   bio?: String;
   avatar?: String;
   wallpaper?: String;
@@ -1543,6 +1585,7 @@ export interface UserPreviousValuesPromise
   id: () => Promise<ID_Output>;
   username: () => Promise<String>;
   password: () => Promise<String>;
+  nickname: () => Promise<String>;
   bio: () => Promise<String>;
   avatar: () => Promise<String>;
   wallpaper: () => Promise<String>;
@@ -1556,6 +1599,7 @@ export interface UserPreviousValuesSubscription
   id: () => Promise<AsyncIterator<ID_Output>>;
   username: () => Promise<AsyncIterator<String>>;
   password: () => Promise<AsyncIterator<String>>;
+  nickname: () => Promise<AsyncIterator<String>>;
   bio: () => Promise<AsyncIterator<String>>;
   avatar: () => Promise<AsyncIterator<String>>;
   wallpaper: () => Promise<AsyncIterator<String>>;

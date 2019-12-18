@@ -2,6 +2,7 @@ type User {
   id: ID! @id
   username: String! @unique
   password: String!
+  nickname: String
   bio: String
   avatar: String
   wallpaper: String

@@ -525,6 +525,7 @@ type User {
   id: ID!
   username: String!
   password: String!
+  nickname: String
   bio: String
   avatar: String
   wallpaper: String
@@ -543,6 +544,7 @@ input UserCreateInput {
   id: ID
   username: String!
   password: String!
+  nickname: String
   bio: String
   avatar: String
   wallpaper: String
@@ -568,6 +570,7 @@ input UserCreateWithoutRoomsInput {
   id: ID
   username: String!
   password: String!
+  nickname: String
   bio: String
   avatar: String
   wallpaper: String
@@ -585,6 +588,8 @@ enum UserOrderByInput {
   username_DESC
   password_ASC
   password_DESC
+  nickname_ASC
+  nickname_DESC
   bio_ASC
   bio_DESC
   avatar_ASC
@@ -601,6 +606,7 @@ type UserPreviousValues {
   id: ID!
   username: String!
   password: String!
+  nickname: String
   bio: String
   avatar: String
   wallpaper: String
@@ -651,6 +657,20 @@ input UserScalarWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
+  nickname: String
+  nickname_not: String
+  nickname_in: [String!]
+  nickname_not_in: [String!]
+  nickname_lt: String
+  nickname_lte: String
+  nickname_gt: String
+  nickname_gte: String
+  nickname_contains: String
+  nickname_not_contains: String
+  nickname_starts_with: String
+  nickname_not_starts_with: String
+  nickname_ends_with: String
+  nickname_not_ends_with: String
   bio: String
   bio_not: String
   bio_in: [String!]
@@ -735,6 +755,7 @@ input UserSubscriptionWhereInput {
 input UserUpdateDataInput {
   username: String
   password: String
+  nickname: String
   bio: String
   avatar: String
   wallpaper: String
@@ -744,6 +765,7 @@ input UserUpdateDataInput {
 input UserUpdateInput {
   username: String
   password: String
+  nickname: String
   bio: String
   avatar: String
   wallpaper: String
@@ -753,6 +775,7 @@ input UserUpdateInput {
 input UserUpdateManyDataInput {
   username: String
   password: String
+  nickname: String
   bio: String
   avatar: String
   wallpaper: String
@@ -773,6 +796,7 @@ input UserUpdateManyInput {
 input UserUpdateManyMutationInput {
   username: String
   password: String
+  nickname: String
   bio: String
   avatar: String
   wallpaper: String
@@ -805,6 +829,7 @@ input UserUpdateOneRequiredInput {
 input UserUpdateWithoutRoomsDataInput {
   username: String
   password: String
+  nickname: String
   bio: String
   avatar: String
   wallpaper: String
@@ -880,6 +905,20 @@ input UserWhereInput {
   password_not_starts_with: String
   password_ends_with: String
   password_not_ends_with: String
+  nickname: String
+  nickname_not: String
+  nickname_in: [String!]
+  nickname_not_in: [String!]
+  nickname_lt: String
+  nickname_lte: String
+  nickname_gt: String
+  nickname_gte: String
+  nickname_contains: String
+  nickname_not_contains: String
+  nickname_starts_with: String
+  nickname_not_starts_with: String
+  nickname_ends_with: String
+  nickname_not_ends_with: String
   bio: String
   bio_not: String
   bio_in: [String!]
