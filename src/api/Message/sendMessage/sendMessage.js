@@ -5,17 +5,21 @@ export default {
     sendMessage: async (_, args, { request, isAuthenticated }) => {
       isAuthenticated(request);
       const { user } = request;
-      const { toId, text } = args;
+      const { toIds, text } = args;
       try {
         const roomExistence = await prisma.$exists.room({
           participants_every: {
-            id_in: [user.id, toId]
+            id_in: [user.id, ...toIds]
+          },
+          participants_none: {
+            id_not_in: [user.id, ...toIds]
           }
         });
         if (!roomExistence) {
+          const participants = toIds.map(toId => ({ id: toId }));
           const newRoom = await prisma.createRoom({
             participants: {
-              connect: [{ id: user.id }, { id: toId }]
+              connect: [{ id: user.id }, ...participants]
             }
           });
           return prisma.createMessage({
@@ -35,7 +39,10 @@ export default {
           const room = await prisma.rooms({
             where: {
               participants_every: {
-                id_in: [user.id, toId]
+                id_in: [user.id, ...toIds]
+              },
+              participants_none: {
+                id_not_in: [user.id, ...toIds]
               }
             }
           });
