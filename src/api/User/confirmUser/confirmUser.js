@@ -7,7 +7,7 @@ export default {
       const { username, password } = args;
       try {
         const user = await prisma.user({ username });
-        if (user.password === password) {
+        if (user && user.password === password) {
           return generateToken(username);
         } else {
           throw Error("Wrong username / password conversion");

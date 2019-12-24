@@ -6,6 +6,7 @@ type User {
   bio: String
   avatar: String
   wallpaper: String
+  friends: [User!]! @relation(link: TABLE)
   rooms: [Room!]! @relation(link: TABLE, onDelete: CASCADE)
   createdAt: DateTime! @createdAt
   updatedAt: DateTime! @updatedAt

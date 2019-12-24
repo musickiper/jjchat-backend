@@ -521,6 +521,7 @@ type User {
   bio: String
   avatar: String
   wallpaper: String
+  friends(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   rooms(where: RoomWhereInput, orderBy: RoomOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Room!]
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -540,7 +541,13 @@ input UserCreateInput {
   bio: String
   avatar: String
   wallpaper: String
+  friends: UserCreateManyInput
   rooms: RoomCreateManyWithoutParticipantsInput
+}
+
+input UserCreateManyInput {
+  create: [UserCreateInput!]
+  connect: [UserWhereUniqueInput!]
 }
 
 input UserCreateManyWithoutRoomsInput {
@@ -561,6 +568,7 @@ input UserCreateWithoutRoomsInput {
   bio: String
   avatar: String
   wallpaper: String
+  friends: UserCreateManyInput
 }
 
 type UserEdge {
@@ -746,6 +754,7 @@ input UserUpdateDataInput {
   bio: String
   avatar: String
   wallpaper: String
+  friends: UserUpdateManyInput
   rooms: RoomUpdateManyWithoutParticipantsInput
 }
 
@@ -756,6 +765,7 @@ input UserUpdateInput {
   bio: String
   avatar: String
   wallpaper: String
+  friends: UserUpdateManyInput
   rooms: RoomUpdateManyWithoutParticipantsInput
 }
 
@@ -766,6 +776,18 @@ input UserUpdateManyDataInput {
   bio: String
   avatar: String
   wallpaper: String
+}
+
+input UserUpdateManyInput {
+  create: [UserCreateInput!]
+  update: [UserUpdateWithWhereUniqueNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueNestedInput!]
+  delete: [UserWhereUniqueInput!]
+  connect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  updateMany: [UserUpdateManyWithWhereNestedInput!]
 }
 
 input UserUpdateManyMutationInput {
@@ -808,6 +830,12 @@ input UserUpdateWithoutRoomsDataInput {
   bio: String
   avatar: String
   wallpaper: String
+  friends: UserUpdateManyInput
+}
+
+input UserUpdateWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateDataInput!
 }
 
 input UserUpdateWithWhereUniqueWithoutRoomsInput {
@@ -816,6 +844,12 @@ input UserUpdateWithWhereUniqueWithoutRoomsInput {
 }
 
 input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserUpsertWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput!
   update: UserUpdateDataInput!
   create: UserCreateInput!
 }
@@ -925,6 +959,9 @@ input UserWhereInput {
   wallpaper_not_starts_with: String
   wallpaper_ends_with: String
   wallpaper_not_ends_with: String
+  friends_every: UserWhereInput
+  friends_some: UserWhereInput
+  friends_none: UserWhereInput
   rooms_every: RoomWhereInput
   rooms_some: RoomWhereInput
   rooms_none: RoomWhereInput
