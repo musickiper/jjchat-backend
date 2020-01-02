@@ -7,7 +7,13 @@
   "author": "James Jung <leedo01219@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/server.js"
+    "dev": "nodemon --exec babel-node src/server.js",
+    "deploy": "prisma deploy",
+    "generate": "prisma generate",
+    "prisma": "prisma deploy && prisma generate",
+    "one": "babel src -d build",
+    "two": "cd src && cp -R -n ./api/ ../build/api/",
+    "start": "node build/server.js"
   },
   "dependencies": {
     "dotenv": "^8.2.0",
